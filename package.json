@@ -1,0 +1,88 @@
+{
+  "name": "gluekit-workbench",
+  "displayName": "GlueKit Workbench",
+  "description": "GlueKit 工作台：流程·地图·Proposal/Spec/规约配套/Tasks·Glue·Harness·示例·.qoder（侧栏+编辑区）",
+  "version": "0.5.3",
+  "publisher": "Zhaobo Lv",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gluekit/v7-cursor.git",
+    "directory": "gluekit-workbench"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gluekit.workbench.openPanel",
+        "title": "GlueKit: 打开工作台（编辑区）"
+      },
+      {
+        "command": "gluekit.workbench.refresh",
+        "title": "GlueKit: 刷新工作台"
+      },
+      {
+        "command": "gluekit.workbench.createProposal",
+        "title": "GlueKit: 新建 Proposal 模板"
+      },
+      {
+        "command": "gluekit.workbench.createSpec",
+        "title": "GlueKit: 新建 Spec 模板"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "gluekit-workbench",
+          "title": "GlueKit",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "gluekit-workbench": [
+        {
+          "type": "webview",
+          "id": "gluekit.workbench.sidebar",
+          "name": "工作台"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "gluekit.workbench.refresh",
+          "when": "view == gluekit.workbench.sidebar",
+          "group": "navigation@1"
+        },
+        {
+          "command": "gluekit.workbench.openPanel",
+          "when": "view == gluekit.workbench.sidebar",
+          "group": "navigation@2"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "npm run compile && npx --yes @vscode/vsce package --no-dependencies",
+    "open-dev-host": "cursor --extensionDevelopmentPath=. .."
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "typescript": "^5.4.0"
+  }
+}
